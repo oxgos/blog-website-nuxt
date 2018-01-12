@@ -1,0 +1,49 @@
+html,
+body,
+img,
+p,
+ul,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+figure {
+    padding: 0;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    text-align: left;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-size: 12px;
+    font-family: "Microsoft Yahei", Arial, Helvetica, sans-serif;
+}
+
+img {
+    vertical-align: middle;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
