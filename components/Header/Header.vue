@@ -5,9 +5,7 @@
       <nav class="nav">
           <ul>
               <li class="active"><router-link to="/">首页</router-link></li>
-              <li><router-link to="/about">关于我</router-link></li>
-              <li><router-link to="/website">前端分享</router-link></li>
-              <li><router-link to="/server">后端分享</router-link></li>
+              <li v-for="(item, index) in navData" :key="index"><router-link :to="item.path">{{item.name}}</router-link></li>
           </ul>
           <div class="logo">
             <router-link to="/"></router-link>
@@ -15,6 +13,28 @@
       </nav>
   </div>
 </template>
+
+<script>
+  import axios from 'axios'
+  export default {
+    data () {
+      return {
+        navData: []
+      }
+    },
+    created () {
+      this.loadingNav()
+    },
+    methods: {
+      loadingNav () {
+        axios.get('/categories').then(res => {
+          this.navData = res.data.result
+        })
+      }
+    }
+  }
+</script>
+
 
 <style lang="less" scoped>
   @import './header.less';

@@ -21,12 +21,20 @@ module.exports = {
   */
   loading: { color: '#3B8070' },
   /*
+  ** Dev configuration
+  */
+  dev: {
+    extend (config, { isDev, isClient }) {
+    }
+  },
+  /*
   ** Build configuration
   */
   build: {
     /*
     ** Run ESLint on save
     */
+    vendor: ['axios'],
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -37,5 +45,13 @@ module.exports = {
         })
       }
     }
-  }
+  },
+  modules: [
+      '@nuxtjs/proxy'
+  ],
+  proxy: [
+      ['/users', { target: 'http://localhost:3000' }],
+      ['/articles', { target: 'http://localhost:3000' }],
+      ['/categories', { target: 'http://localhost:3000' }]
+  ]
 }
