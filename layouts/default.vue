@@ -17,7 +17,7 @@
   }
 </script>
 
-<style>
+<style lang="less" scoped>
 #app {
   width: 100%;
   -webkit-font-smoothing: antialiased;
@@ -30,5 +30,14 @@
   margin: 0 auto;
   background: url('~assets/img/index/bg.png') repeat-y;
   box-shadow: -2px -1px 5px #666;
+  &::before {
+      display: block;
+      content: '';
+  }
+  &::after {
+      display: block;
+      content: '';
+      clear: both;        
+  }
 }
 </style>
