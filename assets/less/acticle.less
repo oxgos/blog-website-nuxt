@@ -41,6 +41,12 @@
             .blogs {
                 margin: 0 20px 20px 20px;
                 position: relative;
+                &:hover::before {
+                    background: #474645;
+                }
+                &:hover::after {
+                    opacity: 1;
+                }
                 &::before {
                     content: "";
                     width: 10px;
@@ -50,6 +56,21 @@
                     background: #cac1c1;
                     border: 2px solid #fff;
                     left: -27px;
+                    transition: all 1s;
+                }
+                &::after {
+                    content: "";
+                    width: 121px;
+                    height: 29px;
+                    position: absolute;
+                    left: -148px;
+                    top: -9px;
+                    z-index: 0;
+                    background: #474645 url('./../img/ti.png') no-repeat;
+                    opacity: 0;
+                    -webkit-transition: all 1s;
+                    -moz-transition: all 1s;
+                    -o-transition: all 1s;
                     transition: all 1s;
                 }
                 h3 {
@@ -106,7 +127,7 @@
                 .dateview {
                     position: absolute;
                     left: -125px;
-                    top: 0px;
+                    top: -1px;
                     z-index: 1;
                     color: #F5F5F5;
                 }
