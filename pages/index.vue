@@ -6,100 +6,24 @@
             <h2>
               <p><span>文章</span>推荐</p>
             </h2>
-            <div class="blogs">
+            <div class="blogs" v-for="item in articles" :key="item._id">
               <h3>
-                <a href="/">犯错了怎么办？</a>
+                <a href="/">{{item.title}}</a>
               </h3>
               <figure>
-                <img src="~assets/img/index/01.jpg" alt="">
+                <img :src="item.poster" alt="">
               </figure>
               <div class="content">
-                <p>看到昔日好友发了一篇日志《咎由自取》他说他是一个悲观者，感觉社会抛弃了他，脾气、性格在6年的时间里变化很大，很难适应这个社会。人生其实就是不断犯错的过程，在这个过程中不断的犯错，不断的吸取教训，不断的成长。也许日子里的惊涛骇浪，不过是人生中的水花摇晃，别用显微镜放大你的悲伤。</p>
+                <p v-html="item.htmlContent"></p>
                 <a href="/" class="readmore">阅读全文>></a>
               </div>
               <p class="autor">
-                <span>作者：杨青</span>
-                <span>分类：【<a href="/">日记</a>】</span>
+                <span>作者：郭剑伟</span>
+                <span>分类：【<a href="/">{{item.category.name}}</a>】</span>
                 <span>浏览（<a href="/">459</a>）</span>
                 <span>评论（<a href="/">30</a>）</span>
               </p>
-              <div class="dateview">2017-10-16</div>
-            </div>
-            <div class="blogs">
-              <h3>
-                <a href="/">犯错了怎么办？</a>
-              </h3>
-              <figure>
-                <img src="./../assets/img/index/01.jpg" alt="">
-              </figure>
-              <div class="content">
-                <p>看到昔日好友发了一篇日志《咎由自取》他说他是一个悲观者，感觉社会抛弃了他，脾气、性格在6年的时间里变化很大，很难适应这个社会。人生其实就是不断犯错的过程，在这个过程中不断的犯错，不断的吸取教训，不断的成长。也许日子里的惊涛骇浪，不过是人生中的水花摇晃，别用显微镜放大你的悲伤。</p>
-                <a href="/" class="readmore">阅读全文>></a>
-              </div>
-              <p class="autor">
-                <span>作者：杨青</span>
-                <span>分类：【<a href="/">日记</a>】</span>
-                <span>浏览（<a href="/">459</a>）</span>
-                <span>评论（<a href="/">30</a>）</span>
-              </p>
-              <div class="dateview">2017-10-16</div>
-            </div>
-            <div class="blogs">
-              <h3>
-                <a href="/">犯错了怎么办？</a>
-              </h3>
-              <figure>
-                <img src="./../assets/img/index/01.jpg" alt="">
-              </figure>
-              <div class="content">
-                <p>看到昔日好友发了一篇日志《咎由自取》他说他是一个悲观者，感觉社会抛弃了他，脾气、性格在6年的时间里变化很大，很难适应这个社会。人生其实就是不断犯错的过程，在这个过程中不断的犯错，不断的吸取教训，不断的成长。也许日子里的惊涛骇浪，不过是人生中的水花摇晃，别用显微镜放大你的悲伤。</p>
-                <a href="/" class="readmore">阅读全文>></a>
-              </div>
-              <p class="autor">
-                <span>作者：杨青</span>
-                <span>分类：【<a href="/">日记</a>】</span>
-                <span>浏览（<a href="/">459</a>）</span>
-                <span>评论（<a href="/">30</a>）</span>
-              </p>
-              <div class="dateview">2017-10-16</div>
-            </div>
-            <div class="blogs">
-              <h3>
-                <a href="/">犯错了怎么办？</a>
-              </h3>
-              <figure>
-                <img src="./../assets/img/index/01.jpg" alt="">
-              </figure>
-              <div class="content">
-                <p>看到昔日好友发了一篇日志《咎由自取》他说他是一个悲观者，感觉社会抛弃了他，脾气、性格在6年的时间里变化很大，很难适应这个社会。人生其实就是不断犯错的过程，在这个过程中不断的犯错，不断的吸取教训，不断的成长。也许日子里的惊涛骇浪，不过是人生中的水花摇晃，别用显微镜放大你的悲伤。</p>
-                <a href="/" class="readmore">阅读全文>></a>
-              </div>
-              <p class="autor">
-                <span>作者：杨青</span>
-                <span>分类：【<a href="/">日记</a>】</span>
-                <span>浏览（<a href="/">459</a>）</span>
-                <span>评论（<a href="/">30</a>）</span>
-              </p>
-              <div class="dateview">2017-10-16</div>
-            </div>
-            <div class="blogs">
-              <h3>
-                <a href="/">犯错了怎么办？</a>
-              </h3>
-              <figure>
-                <img src="./../assets/img/index/01.jpg" alt="">
-              </figure>
-              <div class="content">
-                <p>看到昔日好友发了一篇日志《咎由自取》他说他是一个悲观者，感觉社会抛弃了他，脾气、性格在6年的时间里变化很大，很难适应这个社会。人生其实就是不断犯错的过程，在这个过程中不断的犯错，不断的吸取教训，不断的成长。也许日子里的惊涛骇浪，不过是人生中的水花摇晃，别用显微镜放大你的悲伤。</p>
-                <a href="/" class="readmore">阅读全文>></a>
-              </div>
-              <p class="autor">
-                <span>作者：杨青</span>
-                <span>分类：【<a href="/">日记</a>】</span>
-                <span>浏览（<a href="/">459</a>）</span>
-                <span>评论（<a href="/">30</a>）</span>
-              </p>
-              <div class="dateview">2017-10-16</div>
+              <div class="dateview">{{item.meta.createdAt | formatDate}}</div>
             </div>
           </div>
       </div>
@@ -181,7 +105,38 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
+    /* async asyncData ({ params }) {
+      let { data } = await axios.get('/feArticles')
+      console.log(data)
+      return {
+        articles: data
+      }
+    }, */
+    data () {
+      return {
+        articles: []
+      }
+    },
+    created () {
+      this.loadingArticles()
+    },
+    methods: {
+      loadingArticles () {
+        axios.get('/feArticles').then(res => {
+          if (res.data.status === '1') {
+            this.articles = res.data.result
+          }
+        })
+      }
+    },
+    filters: {
+      formatDate (params) {
+        let date = params.split('T')[0]
+        return date
+      }
+    },
     components: {
     }
   }

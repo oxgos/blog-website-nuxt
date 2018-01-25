@@ -28,7 +28,7 @@
     },
     methods: {
       loadingNav () {
-        axios.get('/categories').then(res => {
+        axios.get('/feCategories').then(res => {
           this.navData = res.data.result
         })
       }

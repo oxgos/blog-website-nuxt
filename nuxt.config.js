@@ -50,8 +50,8 @@ module.exports = {
       '@nuxtjs/proxy'
   ],
   proxy: [
-      ['/users', { target: 'http://localhost:3000' }],
-      ['/articles', { target: 'http://localhost:3000' }],
-      ['/categories', { target: 'http://localhost:3000' }]
+      ['/feCategories', { target: 'http://localhost:3000' }],
+      ['/feArticles', { target: 'http://localhost:3000' }],
+      ['/upload', { target: 'http://localhost:3000' }]
   ]
 }
