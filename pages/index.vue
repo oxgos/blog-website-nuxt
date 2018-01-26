@@ -26,6 +26,16 @@
               <div class="dateview">{{item.meta.createdAt | formatDate}}</div>
             </div>
           </div>
+          <div class="page">
+            <a title="Total record"><b>113</b></a>
+            <a href="/">1</a>
+            <a href="/">2</a>
+            <a href="/">3</a>
+            <a href="/">4</a>
+            <a href="/">5</a>
+            <a href="/">&gt;</a>
+            <a href="/">&gt;&gt;</a>
+          </div>
       </div>
       <aside>
           <div class="avatar">
@@ -116,7 +126,13 @@
     }, */
     data () {
       return {
-        articles: []
+        articles: [],
+        // 文章总数
+        total: 0,
+        // 总页数
+        page: 0,
+        // 现第几页
+        current: 0
       }
     },
     created () {
@@ -124,9 +140,15 @@
     },
     methods: {
       loadingArticles () {
-        axios.get('/feArticles').then(res => {
+        axios.get('/feArticles', {
+          params: {
+            index: current
+          }
+        }).then(res => {
           if (res.data.status === '1') {
-            this.articles = res.data.result
+            this.articles = res.data.result.articles
+            this.total = res.data.result.total
+            this.page = res.data.result.page
           }
         })
       }
