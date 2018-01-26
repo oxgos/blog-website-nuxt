@@ -6,15 +6,15 @@
             <h2>
               <p><span>文章</span>推荐</p>
             </h2>
-            <div class="blogs" v-for="item in articles" :key="item._id">
+            <div class="blogs" v-for="(item, index) in articles" :key="index">
               <h3>
-                <a href="/">{{item.title}}</a>
+                <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
               </h3>
               <figure>
                 <img :src="item.poster" alt="">
               </figure>
               <div class="content">
-                <p v-html="item.htmlContent"></p>
+                <p>{{item.introduce}}</p>
                 <a href="/" class="readmore">阅读全文>></a>
               </div>
               <p class="autor">
@@ -136,8 +136,6 @@
         let date = params.split('T')[0]
         return date
       }
-    },
-    components: {
     }
   }
 </script>
