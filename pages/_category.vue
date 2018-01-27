@@ -19,6 +19,7 @@
                     <div class="dateview">{{item.meta.createdAt | formatDate}}</div>
                 </div>
             </div>
+            <Page v-if="page > 1" :total="total" :page="page" :current="current" @changeCurrent="changeCurrent"></Page>
         </div>
         <AsideBar></AsideBar>
     </div>
@@ -28,11 +29,15 @@
     import axios from 'axios'
     import NavBread from '~/components/NavBread/NavBread'
     import AsideBar from '~/components/AsideBar/AsideBar'
+    import Page from '~/components/Page/Page'
     export default {
         data () {
             return {
                 articles: [],
-                categoryType: ''
+                categoryType: '',
+                total: 0,
+                page: 0,
+                current: 0
             }
         },
         /* async asyncData ({ params }) {
@@ -46,10 +51,6 @@
                 categoryType: data.result.name
             }
         }, */
-        components: {
-            NavBread,
-            AsideBar
-        },
         created () {
             this.loadingArticles()
         },
@@ -57,14 +58,21 @@
             loadingArticles () {
                 axios.get('/feCategories/articleList', {
                     params: {
-                        path: this.$route.path
+                        path: this.$route.path,
+                        index: this.current
                     }
                 }).then(res => {
                     if (res.data.status === '1') {
                         this.articles = res.data.result.articles
                         this.categoryType = res.data.result.name
+                        this.total = res.data.result.total
+                        this.page = res.data.result.page
                     }
                 })
+            },
+            changeCurrent (index) {
+                this.current = index
+                this.loadingArticles()
             }
         },
         filters: {
@@ -72,6 +80,11 @@
                 let date = params.split('T')[0]
                 return date
             }
+        },
+        components: {
+            NavBread,
+            AsideBar,
+            Page
         }
     }
 </script>
