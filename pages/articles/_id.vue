@@ -4,7 +4,8 @@
             <NavBread>
                 <a slot="link" href="javascript: void(0);">文章详情</a>
             </NavBread>
-            <div class="content" v-html="article.htmlContent"></div>
+            <Loading :flag="loadingFlag"></Loading>
+            <div v-if="!loadingFlag" class="content" v-html="article.htmlContent"></div>
         </div>
         <IndexAside></IndexAside>
     </div>
@@ -14,10 +15,12 @@
     import axios from 'axios'
     import NavBread from '~/components/NavBread/NavBread'
     import IndexAside from '~/components/IndexAside/IndexAside'
+    import Loading from '~/components/Loading/Loading'
     export default {
         data () {
             return {
-                article: ''
+                article: '',
+                loadingFlag: false
             }
         },
         created () {
@@ -25,11 +28,13 @@
         },
         methods: {
             loadingArticleDetail () {
+                this.loadingFlag = true
                 axios.get('/feArticles/detail', {
                     params: {
                         id: this.$route.params.id
                     }
                 }).then(res => {
+                    this.loadingFlag = false
                     if (res.data.status === '1') {
                         this.article = res.data.result
                     }
@@ -38,7 +43,8 @@
         },
         components: {
             NavBread,
-            IndexAside
+            IndexAside,
+            Loading
         }
     }
 </script>

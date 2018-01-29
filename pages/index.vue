@@ -6,7 +6,8 @@
             <h2>
               <p><span>文章</span>推荐</p>
             </h2>
-            <div class="blogs" v-for="(item, index) in articles" :key="index">
+            <Loading :flag="loadingFlag"></Loading>
+            <div v-if="!loadingFlag" class="blogs" v-for="(item, index) in articles" :key="index">
               <h3>
                 <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
               </h3>
@@ -26,7 +27,7 @@
               <div class="dateview">{{item.meta.createdAt | formatDate}}</div>
             </div>
           </div>
-          <Page v-if="page > 1" :total="total" :page="page" :current="current" @changeCurrent="changeCurrent"></Page>
+          <Page v-if="page > 1 && !loadingFlag" :total="total" :page="page" :current="current" @changeCurrent="changeCurrent"></Page>
       </div>
       <IndexAside></IndexAside>
   </div>
@@ -36,6 +37,7 @@
   import axios from 'axios'
   import Page from '~/components/Page/Page'
   import IndexAside from '~/components/IndexAside/IndexAside'
+  import Loading from '~/components/Loading/Loading'
   export default {
     /* async asyncData ({ params }) {
       let { data } = await axios.get('/feArticles')
@@ -52,7 +54,8 @@
         // 总页数
         page: 0,
         // 现第几页
-        current: 0
+        current: 0,
+        loadingFlag: false
       }
     },
     created () {
@@ -60,11 +63,13 @@
     },
     methods: {
       loadingArticles () {
+        this.loadingFlag = true
         axios.get('/feArticles', {
           params: {
             index: this.current
           }
         }).then(res => {
+          this.loadingFlag = false
           if (res.data.status === '1') {
             this.articles = res.data.result.articles
             this.total = res.data.result.total
@@ -85,7 +90,8 @@
     },
     components: {
       Page,
-      IndexAside
+      IndexAside,
+      Loading
     }
   }
 </script>

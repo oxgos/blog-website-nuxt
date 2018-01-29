@@ -1,13 +1,15 @@
 <template>
     <aside class="IndexAside">
         <router-link to="/">
-            <img class="avatar" :src="'../' + userInfo.avatar"/>
+            <Loading class="avatar" :flag="loadingFlag"></Loading>
+            <img v-if="!loadingFlag" class="avatar" :src="'../' + userInfo.avatar"/>
         </router-link>
         <div class="topspaceinfo">
         <h1>执子之手，与子偕老</h1>
         <p>于千万人之中，我遇见了我所遇见的人....</p>
         </div>
-        <ul class="about-me">
+        <Loading :flag="loadingFlag"></Loading>
+        <ul v-if="!loadingFlag" class="about-me">
             <li>姓名：{{userInfo.username}}</li>
             <li>职业：{{userInfo.job}}</li>
             <li>籍贯：{{userInfo.address}}</li>
@@ -27,7 +29,8 @@
         <h2>
             <p class="tj_t1">最新文章</p>
         </h2>
-        <ul>
+        <Loading :flag="loadingFlag"></Loading>
+        <ul v-if="!loadingFlag">
             <li v-for="(item, index) in newest" :key="index">
                 <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
             </li>
@@ -35,7 +38,8 @@
         <h2>
             <p class="tj_t2">点击排行</p>
         </h2>
-        <ul>
+        <Loading :flag="loadingFlag"></Loading>
+        <ul v-if="!loadingFlag">
             <li v-for="(item, index) in pv" :key="index">
                 <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
             </li>
@@ -67,12 +71,14 @@
 
 <script type="text/ecmascript-6">
     import axios from 'axios'
+    import Loading from '~/components/Loading/Loading'
     export default {
         data () {
             return {
                 userInfo: '',
                 newest: [],
-                pv: []
+                pv: [],
+                loadingFlag: false
             }
         },
         created () {
@@ -89,12 +95,17 @@
                 return axios.get('/feArticles/pv')
             },
             loadingInit () {
+                this.loadingFlag = true
                 axios.all([this.getInfo(), this.getNewest(), this.getPv()]).then(axios.spread((user, newest, pv) => {
+                    this.loadingFlag = false
                     this.userInfo = user.data.result.info
                     this.newest = newest.data.result
                     this.pv = pv.data.result
                 }))
             }
+        },
+        components: {
+            Loading
         }
     }
 </script>

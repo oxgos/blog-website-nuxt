@@ -4,7 +4,8 @@
             <NavBread>
                 <a slot="link" href="javascript: void(0);">{{ categoryType }}</a>
             </NavBread>
-            <div class="bloglist">
+            <Loading :flag="loadingFlag"></Loading>
+            <div v-if="!loadingFlag" class="bloglist">
                 <div class="newblog" v-for="(item, index) in articles" :key="index">
                     <ul>
                         <h3>
@@ -19,7 +20,7 @@
                     <div class="dateview">{{item.meta.createdAt | formatDate}}</div>
                 </div>
             </div>
-            <Page v-if="page > 1" :total="total" :page="page" :current="current" @changeCurrent="changeCurrent"></Page>
+            <Page v-if="page > 1 && !loadingFlag" :total="total" :page="page" :current="current" @changeCurrent="changeCurrent"></Page>
         </div>
         <IndexAside></IndexAside>
     </div>
@@ -30,6 +31,7 @@
     import NavBread from '~/components/NavBread/NavBread'
     import IndexAside from '~/components/IndexAside/IndexAside'
     import Page from '~/components/Page/Page'
+    import Loading from '~/components/Loading/Loading'
     export default {
         data () {
             return {
@@ -37,7 +39,8 @@
                 categoryType: '',
                 total: 0,
                 page: 0,
-                current: 0
+                current: 0,
+                loadingFlag: false
             }
         },
         /* async asyncData ({ params }) {
@@ -56,12 +59,14 @@
         },
         methods: {
             loadingArticles () {
+                this.loadingFlag = true
                 axios.get('/feCategories/articleList', {
                     params: {
                         path: this.$route.path,
                         index: this.current
                     }
                 }).then(res => {
+                    this.loadingFlag = false
                     if (res.data.status === '1') {
                         this.articles = res.data.result.articles
                         this.categoryType = res.data.result.name
@@ -84,7 +89,8 @@
         components: {
             NavBread,
             IndexAside,
-            Page
+            Page,
+            Loading
         }
     }
 </script>
