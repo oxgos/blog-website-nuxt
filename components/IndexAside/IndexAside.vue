@@ -1,18 +1,18 @@
 <template>
     <aside class="IndexAside">
-        <div class="avatar">
-            <router-link to="/"></router-link>
-        </div>
+        <router-link to="/">
+            <img class="avatar" :src="'../' + userInfo.avatar"/>
+        </router-link>
         <div class="topspaceinfo">
         <h1>执子之手，与子偕老</h1>
         <p>于千万人之中，我遇见了我所遇见的人....</p>
         </div>
         <ul class="about-me">
-        <li>网名：ochai</li>
-        <li>职业：Web前端设计师、网页设计</li>
-        <li>籍贯：广东省—广州市</li>
-        <li>电话：*********</li>
-        <li>邮箱：122486975@qq.com</li>
+            <li>姓名：{{userInfo.username}}</li>
+            <li>职业：{{userInfo.job}}</li>
+            <li>籍贯：{{userInfo.address}}</li>
+            <li>电话：{{userInfo.tel}}</li>
+            <li>邮箱：1{{userInfo.email}}</li>
         </ul>
         <!-- <div class="sharebutton">
         <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
@@ -28,27 +28,17 @@
             <p class="tj_t1">最新文章</p>
         </h2>
         <ul>
-            <li><a href="#">犯错了怎么办？</a></li>
-            <li><a href="#">两只蜗牛艰难又浪漫的一吻</a></li>
-            <li><a href="#">春暖花开-走走停停-发现美</a></li>
-            <li><a href="#">琰智国际-Nativ for Life官方网站</a></li>
-            <li><a href="#">个人博客模板（2014草根寻梦</a></li>
-            <li><a href="#">简单手工纸玫瑰</a></li>
-            <li><a href="#">响应式个人博客模板（蓝色清新</a></li>
-            <li><a href="#">蓝色政府（卫生计划生育局）网站</a></li>
+            <li v-for="(item, index) in newest" :key="index">
+                <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
+            </li>
         </ul>
         <h2>
-            <p class="tj_t2">推荐文章</p>
+            <p class="tj_t2">点击排行</p>
         </h2>
         <ul>
-            <li><a href="#">犯错了怎么办？</a></li>
-            <li><a href="#">两只蜗牛艰难又浪漫的一吻</a></li>
-            <li><a href="#">春暖花开-走走停停-发现美</a></li>
-            <li><a href="#">琰智国际-Nativ for Life官方网站</a></li>
-            <li><a href="#">个人博客模板（2014草根寻梦</a></li>
-            <li><a href="#">简单手工纸玫瑰</a></li>
-            <li><a href="#">响应式个人博客模板（蓝色清新</a></li>
-            <li><a href="#">蓝色政府（卫生计划生育局）网站</a></li>
+            <li v-for="(item, index) in pv" :key="index">
+                <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
+            </li>
         </ul>
         </div>
         <div class="links">
@@ -57,13 +47,13 @@
         </h2>
         <ul>
             <li>
-            <a href="#">郭剑伟个人站点</a>
+            <router-link to="/">郭剑伟个人站点</router-link>
             </li>
             <li>
-            <a href="#">个人Github</a>
+            <a href="https://github.com/oxgos">个人Github</a>
             </li>
             <li>
-            <a href="#">其他博客</a>
+            <a href="http://blog.csdn.net/oxgos">其他博客</a>
             </li>
         </ul>
         </div>
@@ -80,12 +70,30 @@
     export default {
         data () {
             return {
-
+                userInfo: '',
+                newest: [],
+                pv: []
             }
         },
+        created () {
+            this.loadingInit()
+        },
         methods: {
-            loadingInfo () {
-                axios.get()
+            getInfo () {
+                return axios.get('/feUser/author')
+            },
+            getNewest () {
+                return axios.get('/feArticles/newest')
+            },
+            getPv () {
+                return axios.get('/feArticles/pv')
+            },
+            loadingInit () {
+                axios.all([this.getInfo(), this.getNewest(), this.getPv()]).then(axios.spread((user, newest, pv) => {
+                    this.userInfo = user.data.result.info
+                    this.newest = newest.data.result
+                    this.pv = pv.data.result
+                }))
             }
         }
     }

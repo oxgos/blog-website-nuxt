@@ -10,8 +10,8 @@
                         <h3>
                             <router-link :to="`/articles/${item._id}`">{{item.title}}</router-link>
                         </h3>
-                        <div class="autor"><span>作者：郭剑伟</span><span>分类：[<a href="/">{{categoryType}}</a>]</span><span>浏览（<a href="/">459</a>）</span><span>评论（<a href="/">30</a>）</span></div>
-                        <p>{{item.introduce}}<a href="/" target="_blank" class="readmore">全文</a></p>
+                        <div class="autor"><span>作者：郭剑伟</span><span>分类：[<a href="javascript: void(0);">{{categoryType}}</a>]</span><span>浏览（<a href="javascript: void(0);">459</a>）</span><span>评论（<a href="javascript: void(0);">30</a>）</span></div>
+                        <p>{{item.introduce}}<router-link :to="`/articles/${item._id}`" target="_blank" class="readmore">全文</router-link></p>
                     </ul>
                     <figure>
                         <img :src="item.poster">
@@ -21,14 +21,14 @@
             </div>
             <Page v-if="page > 1" :total="total" :page="page" :current="current" @changeCurrent="changeCurrent"></Page>
         </div>
-        <AsideBar></AsideBar>
+        <IndexAside></IndexAside>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import axios from 'axios'
     import NavBread from '~/components/NavBread/NavBread'
-    import AsideBar from '~/components/AsideBar/AsideBar'
+    import IndexAside from '~/components/IndexAside/IndexAside'
     import Page from '~/components/Page/Page'
     export default {
         data () {
@@ -83,7 +83,7 @@
         },
         components: {
             NavBread,
-            AsideBar,
+            IndexAside,
             Page
         }
     }

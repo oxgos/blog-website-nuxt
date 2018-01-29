@@ -1,9 +1,11 @@
+const resolve = require('path').resolve
+
 module.exports = {
   /*
   ** Headers of the page
   */
   head: {
-    title: 'blog-website',
+    title: 'ochai个人博客',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,6 +18,13 @@ module.exports = {
   css: [
     '~/css/reset.css'
   ],
+  extendRoutes (routes) {
+    routes.push({
+      name: 'custom',
+      path: '*',
+      component: resolve(__dirname, 'pages/index.vue')
+    })
+  },
   /*
   ** Customize the progress bar color
   */
@@ -50,8 +59,9 @@ module.exports = {
       '@nuxtjs/proxy'
   ],
   proxy: [
-      ['/feCategories', { target: 'http://localhost:3000' }],
-      ['/feArticles', { target: 'http://localhost:3000' }],
-      ['/upload', { target: 'http://localhost:3000' }]
+    ['/feUser', { target: 'http://localhost:3000' }],
+    ['/feArticles', { target: 'http://localhost:3000' }],
+    ['/feCategories', { target: 'http://localhost:3000' }],
+    ['/upload', { target: 'http://localhost:3000' }]
   ]
 }

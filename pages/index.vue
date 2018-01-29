@@ -15,7 +15,7 @@
               </figure>
               <div class="content">
                 <p>{{item.introduce}}</p>
-                <a href="/" class="readmore">阅读全文>></a>
+                <router-link :to="`/articles/${item._id}`" class="readmore">阅读全文>></router-link>
               </div>
               <p class="autor">
                 <span>作者：郭剑伟</span>

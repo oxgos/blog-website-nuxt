@@ -6,14 +6,14 @@
             </NavBread>
             <div class="content" v-html="article.htmlContent"></div>
         </div>
-        <AsideBar></AsideBar>
+        <IndexAside></IndexAside>
     </div>
 </template>
 
 <script type="text/ecmascript-6">
     import axios from 'axios'
     import NavBread from '~/components/NavBread/NavBread'
-    import AsideBar from '~/components/AsideBar/AsideBar'
+    import IndexAside from '~/components/IndexAside/IndexAside'
     export default {
         data () {
             return {
@@ -38,7 +38,7 @@
         },
         components: {
             NavBread,
-            AsideBar
+            IndexAside
         }
     }
 </script>
