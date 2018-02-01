@@ -1,7 +1,7 @@
 <template>
    <div class="header">
-      <h1>如影随形</h1>
-      <h2>影子是一个会撒谎的精灵，它在虚空中流浪和等待被发现之间;在存在与不存在之间....</h2>
+      <h1>人生的旅途</h1>
+      <h2>面向阳光吧，不问春暖花开，只求快乐面对。因为，透过洒满阳光的玻璃窗，蓦然回首，你何尝不是别人眼中的风景？</h2>
       <nav class="nav">
           <ul>
               <li :class="{'active': current === 'Index'}" @click="navChange('Index', $event)"><router-link to="/">首页</router-link></li>

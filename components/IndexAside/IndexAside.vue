@@ -5,8 +5,8 @@
             <img v-if="!loadingFlag" class="avatar" :src="'../' + userInfo.avatar"/>
         </router-link>
         <div class="topspaceinfo">
-        <h1>执子之手，与子偕老</h1>
-        <p>于千万人之中，我遇见了我所遇见的人....</p>
+            <h1>秉承学到老，活到老</h1>
+            <p>千万不要放纵自己，给自己找不必要的借口。对自己严格一点儿，时间长了，自律便成为一种习惯</p>
         </div>
         <Loading :flag="loadingFlag"></Loading>
         <ul v-if="!loadingFlag" class="about-me">
@@ -14,7 +14,7 @@
             <li>职业：{{userInfo.job}}</li>
             <li>籍贯：{{userInfo.address}}</li>
             <li>电话：{{userInfo.tel}}</li>
-            <li>邮箱：1{{userInfo.email}}</li>
+            <li>邮箱：{{userInfo.email}}</li>
         </ul>
         <!-- <div class="sharebutton">
         <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
